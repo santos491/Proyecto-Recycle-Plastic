@@ -1,0 +1,71 @@
+﻿@page "/sitesRecycles/create"
+@using Entities.Models;
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav" style="background-color: #e3f2fd;">
+            <div class="container" style="background-color: #e3f2fd;">
+                <a class="navbar-brand" href="#page-top">RECYCLE PLASTIC</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #e3f2fd;">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" style="background-color: #e3f2fd;">
+                    <ul class="navbar-nav ms-auto" style="background-color: #e3f2fd;">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/QuienesSomos">¿Quienes Somos?</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/Registration">REGISTRARSE</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/login">LOGIN</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/products">PROYECTOS</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/eventos">Eventos</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/sitesRecycle">REGISTRAR LOCALES</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/counter">TEMAS</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/cursos">Cursos</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/CentreRecycle">MAPA</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h3>AGREGAR</h3>
+
+        <EditForm Model="@_recoleccions" class="card card-body bg-light mt-5" OnValidSubmit="Post">
+            <DataAnnotationsValidator />
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">NOMBRE DEL NEGOCIO </label>
+                <InputText class="form-control" @bind-Value="_recoleccions.Nombre" />
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">DIRECCION</label>
+                <InputText class="form-control" @bind-Value="_recoleccions.Direccion" />
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">CODIGO POSTAL </label>
+                <InputText class="form-control" @bind-Value="_recoleccions.CodigoPostal" />
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">COLONIA </label>
+                <InputText class="form-control" @bind-Value="_recoleccions.Colonia" />
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="AGREGAR" />
+            </div>
+        </EditForm>
+
+        @code {
+
+            private SitesRecycle _recoleccions = new();
+
+            private async Task Post()
+            {
+                await Http.PostAsJsonAsync<SitesRecycle>("sitesRecycle", _recoleccions);
+                Navigation.NavigateTo("/sitesRecycle");
+            }
+
+        }
+        </body>

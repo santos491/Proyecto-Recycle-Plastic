@@ -1,0 +1,21 @@
+@using Recycle_Plastic_Blazor.Pages
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <Authorizing>
+                    <text>POR FAVOR ESPERE UN MOMENTO, ESTAMOS AUTORIZANDO ESTE USUARIO</text>
+                </Authorizing>
+                <NotAuthorized>
+                    <text> INICIA SESION PARA VER ESTA SECCION </text>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <CustomNotFound />
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

@@ -1,0 +1,53 @@
+﻿@*@if (events.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">EVENTO</th>
+                    <th scope="col">LUGAR</th>
+                    <th scope="col">ORGANIZADOR</th>
+                    <th scope="col">CONTACTO</th>
+                    <th scope="col">FECHA</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var eventss in events)
+                {
+                <tr>
+
+                    <td class="align-middle">
+                        @eventss.Evento
+                    </td>
+                    <td class="align-middle">
+                        @eventss.Lugar
+                    </td>
+                    <td class="align-middle">
+                        $@eventss.Organizador
+                    </td>
+                    <td class="align-middle">
+                        $@eventss.Contacto
+                    </td>
+                    <td class="align-middle">
+                        $@eventss.Fecha
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-info" @onclick="() => RedirectToUpdate(eventss.Id)">Update</button>
+                    </td>
+                    <td class="align-middle">
+                <button type="button" class="btn btn-danger" @onclick="() => DeleteEvent(eventss.Id)">Delete</button>
+            </td>
+                </tr>
+                 }
+                </tbody>
+        </table>
+    }
+    else
+    {
+        <span>
+            Loading products...
+        </span>
+    }
+*@

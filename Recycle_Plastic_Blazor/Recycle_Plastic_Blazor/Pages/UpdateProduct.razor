@@ -1,0 +1,54 @@
+﻿@page "/updateProduct/{id}"
+
+<h2>ACTUALIZAR</h2>
+
+@if(_product != null)
+{
+<EditForm Model="_product" OnValidSubmit="Update" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator />
+    <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">Name:</label>
+        <div class="col-md-10">
+            <InputText id="name" class="form-control" @bind-Value="_product.Name" />
+            <ValidationMessage For="@(() => _product.Name)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">MATERIALES USADOS</label>
+        <div class="col-md-10">
+            <InputText id="materials" class="form-control" @bind-Value="_product.materials" />
+            <ValidationMessage For="@(() => _product.materials)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">DESCRIPCION</label>
+        <div class="col-md-10">
+            <InputText id="name" class="form-control" @bind-Value="_product.description" />
+            <ValidationMessage For="@(() => _product.description)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">CONTACTO</label>
+        <div class="col-md-10">
+            <InputText id="name" class="form-control" @bind-Value="_product.contact" />
+            <ValidationMessage For="@(() => _product.contact)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="image" class="col-md-2 col-form-label">IMAGEN</label>
+        <div class="col-md-10">
+            <ImageUpload ImgUrl="@_product.ImageUrl" OnChange="AssignImageUrl" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">ACTUALIZAR</button>
+        </div>
+    </div>
+</EditForm>
+    <SuccessNotification @ref="_notification" />
+}

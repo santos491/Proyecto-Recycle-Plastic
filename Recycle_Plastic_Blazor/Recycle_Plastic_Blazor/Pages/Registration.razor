@@ -1,0 +1,90 @@
+﻿@page "/registration"
+<h3>REGISTRARSE</h3>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav" style="background-color: #e3f2fd;">
+        <div class="container" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="#page-top">RECYCLE PLASTIC</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #e3f2fd;">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" style="background-color: #e3f2fd;">
+                <ul class="navbar-nav ms-auto" style="background-color: #e3f2fd;">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/Registration">INICIAR SESION</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/products">PROYECTOS</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/counter">TEMA</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded-right" href="https://localhost:5001/CentreRecycle">MAPA</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @if (ShowRegistrationErros)
+    {
+<div class="alert alert-danger" role="alert">
+    @foreach (var error in Errors)
+    {
+<p>@error</p>}
+</div>}
+    <!-- Section: Design Block -->
+    <section class=" text-center text-lg-start">
+        <style>
+            .rounded-t-5 {
+                border-top-left-radius: 0.5rem;
+                border-top-right-radius: 0.5rem;
+            }
+
+            .rounded-bl-lg-5 {
+                border-bottom-left-radius: 0.5rem;
+            }
+            }
+        </style>
+        <div class="card mb-3">
+            <div class="row g-0 d-flex align-items-center">
+                <div class="col-lg-4 d-none d-lg-flex">
+                    <img src="https://static.vecteezy.com/system/resources/previews/004/493/005/original/woman-throws-plastic-bottle-into-trash-can-garbage-recycling-sign-the-concept-of-caring-for-environment-and-sorting-garbage-recycle-ecological-lifestyle-illustration-vector.jpg" alt="Trendy Pants and Shoes"
+                         class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+                </div>
+                <div class="col-lg-8">
+                    <div class="card-body py-5 px-md-5">
+
+                        <EditForm Model="_userForRegistration" OnValidSubmit="Register" class="card card-body bg-light mt-5">
+                            <DataAnnotationsValidator />
+                            <div class="form-group row">
+                                <label for="email" class="col-md-2 col-form-label">EMAIL</label>
+                                <div class="col-md-10">
+                                    <InputText id="email" class="form-control" @bind-Value="_userForRegistration.Email" />
+                                    <ValidationMessage For="@(() => _userForRegistration.Email)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-2 col-form-label">CONTRASEÑA</label>
+                                <div class="col-md-10">
+                                    <InputText type="password" id="password" class="form-control" @bind-Value="_userForRegistration.Password" />
+                                    <ValidationMessage For="@(() => _userForRegistration.Password)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="confirm" class="col-md-2 col-form-label">CONFIRMA CONTRASEÑA</label>
+                                <div class="col-md-10">
+                                    <InputText type="password" id="confirm" class="form-control" @bind-Value="_userForRegistration.ConfirmPassword" />
+                                    <ValidationMessage For="@(() => _userForRegistration.ConfirmPassword)" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-success">REGISTRARSE</button>
+                                </div>
+                            </div>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section: Design Block -->
+</body>

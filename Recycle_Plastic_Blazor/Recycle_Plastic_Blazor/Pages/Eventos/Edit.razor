@@ -1,0 +1,65 @@
+﻿@page "/evento/edit/{id:int}"
+@*@using Entities.Models;
+    @inject HttpClient Http;
+    @inject NavigationManager Navigation;
+    @using System.Net.Http.Json;
+
+    <h3>EDITAR</h3>
+
+    @if (_proyectos == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else
+    {
+    <EditForm Model="@_proyectos" OnValidSubmit="Put">
+        <div class="form-group">
+            <label>EVENTO </label>
+            <InputText @bind-Value="_proyectos.Evento" />
+        </div>
+
+        <div class="form-group">
+            <label>Descripcion</label>
+            <InputText @bind-Value="_proyectos.Lugar" />
+        </div>
+
+        <div class="form-group">
+            <label>ORGANIZADOR</label>
+            <InputText @bind-Value="_proyectos.Organizador" />
+        </div>
+
+        <div class="form-group">
+            <label>CONTACTO</label>
+            <InputText @bind-Value="_proyectos.Contacto" />
+        </div>
+
+        <div class="form-group">
+            <label>FECHA</label>
+            <InputText @bind-Value="_proyectos.Fecha" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="EDITAR" />
+        </div>
+    </EditForm>
+    }
+
+
+    @code {
+        [Parameter]
+        public int Id { get; set; }
+
+        private Events _proyectos = null;
+
+        protected override async Task OnInitializedAsync()
+        {
+            _proyectos = await Http.GetFromJsonAsync<Events>($"eventos/{Id}");
+        }
+
+
+        private async Task Put()
+        {
+            await Http.PutAsJsonAsync<Events>($"eventos/{_proyectos.Id}", _proyectos);
+            Navigation.NavigateTo("/eventos");
+        }
+
+    }*@

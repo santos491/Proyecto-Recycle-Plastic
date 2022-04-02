@@ -1,0 +1,62 @@
+﻿@page "/sitesRecycles/edit/{id:int}"
+@*@using Entities.Models;
+    @inject HttpClient Http;
+    @inject NavigationManager Navigation;
+    @using System.Net.Http.Json;
+
+    <h3>EDITAR</h3>
+
+    @if (_recoleccions == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else
+    {
+        <EditForm Model="@_recoleccions" OnValidSubmit="Put">
+            <div class="form-group">
+                <label>NOMBRE DEL NEGOCIO </label>
+                <InputText @bind-Value="_recoleccions.Nombre" />
+            </div>
+
+            <div class="form-group">
+                <label>DIRECCION </label>
+                <InputText @bind-Value="_recoleccions.Direccion" />
+            </div>
+
+            <div class="form-group">
+                <label>Redes_Sociales</label>
+                <InputText @bind-Value="_recoleccions.CodigoPostal" />
+            </div>
+
+            <div class="form-group">
+                <label>CODIGO POSTAL </label>
+                <InputText @bind-Value="_recoleccions.Colonia" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="EDITAR RECOLECTIVOS" />
+            </div>
+        </EditForm>
+    }
+
+
+    @code {
+        [Parameter]
+        public int Id { get; set; }
+
+        private SitesRecycle _recoleccions = null;
+
+        protected override async Task OnInitializedAsync()
+        {
+            _recoleccions = await Http.GetFromJsonAsync<SitesRecycle>($"sitesRecycle/{Id}");
+        }
+
+
+        private async Task Put()
+        {
+            await Http.PutAsJsonAsync<SitesRecycle>($"sitesRecycle/{_recoleccions.Id}", _recoleccions);
+            Navigation.NavigateTo("/sitesRecycle");
+        }
+
+    }
+*@
